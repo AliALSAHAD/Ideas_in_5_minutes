@@ -24,7 +24,7 @@ export function saveVaultSession({ topic, duration, notes = '', lens = '', lang 
   const newSession = {
     id: `sess_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
     topic,
-    duration: duration ?? 5,
+    duration: duration < 1 ? `${Math.round(duration * 60)}s` : (duration ?? 5),
     notes: notes.trim(),
     lens,
     lang,

@@ -64,9 +64,10 @@ function AppContent() {
   }, [handleSpin]);
 
   /* ── Select duration → start timer ───────────────── */
-  const handleSelectDuration = useCallback((minutes) => {
-    setSelectedDuration(minutes);
-    timer.start(minutes);
+  const handleSelectDuration = useCallback((minutes, seconds = 0) => {
+    const totalMinutes = seconds > 0 ? (seconds / 60) : minutes;
+    setSelectedDuration(totalMinutes);
+    timer.start(minutes, seconds);
     setView('timer');
   }, [timer]);
 

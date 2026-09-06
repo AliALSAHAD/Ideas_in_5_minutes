@@ -119,6 +119,20 @@
   font-size: var(--text-lg);
   font-weight: 700;
   color: var(--color-fg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.streakStatWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.flameIcon {
+  color: #ff6b35;
+  flex-shrink: 0;
 }
 
 .statLabel {

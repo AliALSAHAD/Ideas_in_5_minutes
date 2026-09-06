@@ -133,7 +133,7 @@ export default function DoneView({
           className={styles.studioCardBtn}
           onClick={handleExportStudioCard}
           disabled={isExportingCard}
-          aria-label={t.exportStudioCard}
+          aria-label={t.exportStudioCard || t.exportCard}
         >
           {isExportingCard ? (
             <span className={styles.spinner} aria-hidden="true"></span>
@@ -144,7 +144,7 @@ export default function DoneView({
               <polyline points="21 15 16 10 5 21"/>
             </svg>
           )}
-          <span>{isExportingCard ? t.generatingCard : t.exportStudioCard}</span>
+          <span>{isExportingCard ? t.generatingCard : (t.exportStudioCard || t.exportCard)}</span>
         </button>
 
         <button

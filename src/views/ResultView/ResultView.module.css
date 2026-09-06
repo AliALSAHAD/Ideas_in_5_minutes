@@ -55,8 +55,8 @@
 /* ─── Duration grid ──────────────────────────────────── */
 .durationGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-4);
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
   width: 100%;
 }
 
@@ -181,8 +181,11 @@
   color: var(--color-fg);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
   .view { gap: var(--sp-5); }
-  .durationGrid { gap: var(--sp-3); }
+  .durationGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+  }
   .durationCard { padding: var(--sp-5) var(--sp-3); }
 }

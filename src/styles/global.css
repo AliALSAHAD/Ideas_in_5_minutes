@@ -235,7 +235,8 @@ html[lang="ar"] .drum__item--selected {
   text-shadow: var(--drum-item-glow) !important;
 }
 
-html[lang="ar"] [class*="spinLabel"] {
+html[lang="ar"] [class*="spinLabel"],
+html[lang="ar"] [class*="againBtn"] {
   font-family: 'THMANYAHSANS-BLACK', 'ThmanyahSans', sans-serif !important;
   font-weight: 900 !important;
 }

@@ -71,7 +71,9 @@ export async function generateStudioCard({
     day: 'numeric',
     year: 'numeric',
   });
-  const durStr = `${duration ?? 5} ${isAr ? 'دقائق تفكير' : 'min session'}`;
+  const durStr = duration < 1
+    ? (isAr ? `${Math.round(duration * 60)} ثوانٍ (تجربة)` : `${Math.round(duration * 60)}s test`)
+    : `${duration ?? 5} ${isAr ? 'دقائق تفكير' : 'min session'}`;
   const badgeText = lensName ? `${durStr} • ${lensName} • ${dateStr}` : `${durStr} • ${dateStr}`;
 
   ctx.fillStyle = '#ffffff';

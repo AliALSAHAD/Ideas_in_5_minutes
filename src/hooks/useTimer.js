@@ -10,9 +10,9 @@ export function useTimer(onDone) {
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef(null);
 
-  // Start a new session
-  const start = useCallback((minutes) => {
-    const sec = minutes * 60;
+  // Start a new session (supports minutes or specific seconds)
+  const start = useCallback((minutes, seconds = 0) => {
+    const sec = seconds > 0 ? seconds : Math.round(minutes * 60);
     setTotalSec(sec);
     setRemaining(sec);
     setIsPaused(false);

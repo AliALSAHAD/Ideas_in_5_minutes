@@ -57,17 +57,17 @@ export default function ResultView({
           role="group"
           aria-label={t.chooseDuration}
         >
-          {t.durations.map(({ minutes, label }) => (
+          {t.durations.map((item) => (
             <button
-              key={minutes}
+              key={item.seconds ? `${item.seconds}s` : `${item.minutes}m`}
               className={styles.durationCard}
               onMouseMove={handleMouseMove}
-              onClick={() => onSelectDuration(minutes)}
-              aria-label={`${minutes} ${t.min}`}
+              onClick={() => onSelectDuration(item.minutes || 0, item.seconds || 0)}
+              aria-label={`${item.num} ${item.unit || t.min}`}
             >
-              <span className={styles.num}>{minutes}</span>
-              <span className={styles.unit}>{t.min}</span>
-              <span className={styles.cardLabel}>{label}</span>
+              <span className={styles.num}>{item.num}</span>
+              <span className={styles.unit}>{item.unit || t.min}</span>
+              <span className={styles.cardLabel}>{item.label}</span>
             </button>
           ))}
         </div>

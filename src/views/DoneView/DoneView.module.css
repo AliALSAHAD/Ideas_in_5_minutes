@@ -48,27 +48,35 @@
 }
 
 .againBtn {
+  width: 100%;
   padding: var(--sp-4) var(--sp-10);
   border-radius: var(--radius-full);
-  background: var(--color-fg);
-  color: var(--black);
+  background: var(--spin-btn-bg);
+  color: var(--spin-btn-fg);
+  border: 1px solid var(--spin-btn-border);
+  box-shadow: var(--spin-btn-shadow);
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 700;
   font-optical-sizing: auto;
   letter-spacing: -0.01em;
+  cursor: pointer;
   transition:
-    opacity var(--dur-base) var(--ease-out),
-    transform var(--dur-fast) var(--ease-out);
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.15s ease;
 }
 
 .againBtn:hover {
-  opacity: 0.88;
-  transform: translateY(-1px);
+  background: var(--spin-btn-hover-bg);
+  border-color: var(--spin-btn-hover-border);
+  box-shadow: var(--spin-btn-hover-shadow);
+  transform: translateY(-2px);
 }
 
 .againBtn:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 /* ─── Captured Notes Card ────────────────────────────── */

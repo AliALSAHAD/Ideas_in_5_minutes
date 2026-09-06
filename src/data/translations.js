@@ -110,10 +110,12 @@ export const translations = {
     yourTopic: 'Your topic',
     chooseDuration: 'Choose how long you want to think about it:',
     min: 'min',
+    sec: 'sec',
     durations: [
-      { minutes: 2, label: 'Quick spark' },
-      { minutes: 3, label: 'Deep dive' },
-      { minutes: 5, label: 'Full session' },
+      { seconds: 10, label: 'Quick test', num: 10, unit: 'sec' },
+      { minutes: 2, label: 'Quick spark', num: 2, unit: 'min' },
+      { minutes: 3, label: 'Deep dive', num: 3, unit: 'min' },
+      { minutes: 5, label: 'Full session', num: 5, unit: 'min' },
     ],
     tryAnother: 'Try another topic ↻',
     pause: 'Pause',
@@ -163,6 +165,7 @@ export const translations = {
     clearAll: 'Clear Vault',
     // Studio Card
     exportCard: 'Export Studio Card (PNG)',
+    exportStudioCard: 'Export Studio Card (PNG)',
     generatingCard: 'Creating Card…',
     // Theme
     theme: 'Theme',
@@ -183,10 +186,12 @@ export const translations = {
     yourTopic: 'موضوعك المختار',
     chooseDuration: 'اختر مدة التفكير في الموضوع:',
     min: 'د',
+    sec: 'ث',
     durations: [
-      { minutes: 2, label: 'شرارة سريعة' },
-      { minutes: 3, label: 'تعمّق هادئ' },
-      { minutes: 5, label: 'جلسة كاملة' },
+      { seconds: 10, label: 'تجربة سريعة', num: 10, unit: 'ث' },
+      { minutes: 2, label: 'شرارة سريعة', num: 2, unit: 'د' },
+      { minutes: 3, label: 'تعمّق هادئ', num: 3, unit: 'د' },
+      { minutes: 5, label: 'جلسة كاملة', num: 5, unit: 'د' },
     ],
     tryAnother: 'جرّب موضوعاً آخر ↻',
     pause: 'إيقاف مؤقت',
@@ -236,6 +241,7 @@ export const translations = {
     clearAll: 'مسح الأرشيف',
     // بطاقة الاستوديو
     exportCard: 'تصدير بطاقة الاستوديو (PNG)',
+    exportStudioCard: 'تصدير بطاقة الاستوديو (PNG)',
     generatingCard: 'جارِ تجهيز البطاقة…',
     // المظهر
     theme: 'المظهر',
