@@ -1,0 +1,143 @@
+/* ═══════════════════════════════════════════════════════
+   IDEAS IN 5 MINUTES — Design Tokens (Primitive → Semantic)
+   Themes: Dark Monochrome (Photography Studio) & Light Editorial (Warm Alabaster)
+   Font: Fraunces (display) + Inter (UI) / ThmanyahSans (AR)
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── PRIMITIVE TOKENS & DARK THEME (DEFAULT) ────────── */
+:root,
+[data-theme="dark"] {
+  /* Color primitives */
+  --zinc-950: #09090b;
+  --zinc-900: #0c0c0c;
+  --zinc-800: #18181b;
+  --zinc-700: #27272a;
+  --zinc-600: #3f3f46;
+  --zinc-500: #71717a;
+  --zinc-400: #a1a1aa;
+  --zinc-200: #e4e4e7;
+  --zinc-100: #f4f4f5;
+  --white:    #fafafa;
+  --black:    #000000;
+
+  /* Semantic tokens - Dark */
+  --color-bg:            #000000;
+  --color-surface:       #0c0c0e;
+  --color-surface-2:     #18181b;
+  --color-border:        #27272a;
+  --color-border-2:      #3f3f46;
+  --color-fg:            #fafafa;
+  --color-fg-muted:      #a1a1aa;
+  --color-fg-subtle:     #71717a;
+
+  /* Glass & Header tokens */
+  --color-header-bg:     rgba(0, 0, 0, 0.85);
+  --color-glass-bg:      rgba(16, 16, 18, 0.75);
+  --color-glass-border:  rgba(255, 255, 255, 0.1);
+  --color-card-hover-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, #0c0c0e 100%);
+  --color-card-active:   linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, #0c0c0e 100%);
+  --color-aura:          rgba(255, 255, 255, 0.04);
+  --corner-accent:       rgba(255, 255, 255, 0.22);
+  --corner-accent-hover: rgba(255, 255, 255, 0.85);
+  --shadow-card:         0 8px 32px -4px rgba(0, 0, 0, 0.7);
+  --shadow-card-hover:   0 0 0 1px rgba(255, 255, 255, 0.4), 0 0 24px rgba(255, 255, 255, 0.12), 0 16px 36px -4px rgba(0, 0, 0, 0.8);
+  --drum-item-selected:  #ffffff;
+  --drum-item-glow:      0 0 22px rgba(255, 255, 255, 0.4);
+  --drum-shadow:         0 16px 48px -8px rgba(0, 0, 0, 0.85);
+
+  /* Spin Button tokens - Dark */
+  --spin-btn-bg:           linear-gradient(180deg, #18181b 0%, #0c0c0e 100%);
+  --spin-btn-border:       rgba(255, 255, 255, 0.18);
+  --spin-btn-fg:           #ffffff;
+  --spin-btn-sub:          #a1a1aa;
+  --spin-btn-shadow:       0 8px 32px -4px rgba(0, 0, 0, 0.75);
+  --spin-btn-hover-bg:     linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, #0c0c0e 100%);
+  --spin-btn-hover-border: rgba(255, 255, 255, 0.7);
+  --spin-btn-hover-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35), 0 0 28px rgba(255, 255, 255, 0.12), 0 16px 36px -4px rgba(0, 0, 0, 0.8);
+  --spin-btn-hover-glow:   0 0 16px rgba(255, 255, 255, 0.45);
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-ui:      'Inter', system-ui, sans-serif;
+
+  /* Type scale */
+  --text-2xs:  0.625rem;   /* 10px */
+  --text-xs:   0.6875rem;  /* 11px */
+  --text-sm:   0.8125rem;  /* 13px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.375rem;   /* 22px */
+  --text-2xl:  1.75rem;    /* 28px */
+  --text-3xl:  2.5rem;     /* 40px */
+  --text-4xl:  3.5rem;     /* 56px */
+  --text-5xl:  5rem;       /* 80px */
+
+  /* Spacing scale */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+
+  /* Motion */
+  --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:  150ms;
+  --dur-base:  220ms;
+  --dur-slow:  400ms;
+
+  /* Radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   14px;
+  --radius-full: 9999px;
+
+  /* Timer */
+  --ring-r:             86;
+  --ring-circumference: 540.35px; /* 2π × 86 */
+}
+
+/* ─── LIGHT THEME (WARM EDITORIAL ALABASTER) ─────────── */
+[data-theme="light"] {
+  /* Semantic tokens - Light */
+  --color-bg:            #f7f7f8;
+  --color-surface:       #ffffff;
+  --color-surface-2:     #f0f0f3;
+  --color-border:        #e2e2e7;
+  --color-border-2:      #d1d1d6;
+  --color-fg:            #111114;
+  --color-fg-muted:      #52525b;
+  --color-fg-subtle:     #71717a;
+
+  /* Glass & Header tokens - Light */
+  --color-header-bg:     rgba(247, 247, 248, 0.88);
+  --color-glass-bg:      rgba(255, 255, 255, 0.88);
+  --color-glass-border:  rgba(0, 0, 0, 0.08);
+  --color-card-hover-bg: linear-gradient(180deg, #ffffff 0%, #f4f4f7 100%);
+  --color-card-active:   linear-gradient(180deg, #ffffff 0%, #ebebef 100%);
+  --color-aura:          rgba(0, 0, 0, 0.035);
+  --corner-accent:       rgba(0, 0, 0, 0.25);
+  --corner-accent-hover: rgba(0, 0, 0, 0.85);
+  --shadow-card:         0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover:   0 0 0 1px rgba(0, 0, 0, 0.2), 0 12px 32px -4px rgba(0, 0, 0, 0.12);
+  --drum-item-selected:  #09090b;
+  --drum-item-glow:      0 0 12px rgba(0, 0, 0, 0.12);
+  --drum-shadow:         0 12px 40px -10px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  /* Spin Button tokens - Light (Bold Obsidian Primary Pill) */
+  --spin-btn-bg:           #09090b;
+  --spin-btn-border:       #18181b;
+  --spin-btn-fg:           #ffffff;
+  --spin-btn-sub:          rgba(255, 255, 255, 0.75);
+  --spin-btn-shadow:       0 10px 30px -4px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.08);
+  --spin-btn-hover-bg:     #18181b;
+  --spin-btn-hover-border: #000000;
+  --spin-btn-hover-shadow: 0 14px 36px -4px rgba(0, 0, 0, 0.36), 0 0 0 1px rgba(0, 0, 0, 0.2);
+  --spin-btn-hover-glow:   none;
+}

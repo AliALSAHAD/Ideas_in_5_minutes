@@ -1,0 +1,60 @@
+.stage {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--sp-16) + 60px) var(--sp-8) var(--sp-16);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Ambient Background Aura ───────────────────────── */
+.stage::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 750px;
+  height: 480px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    var(--color-aura) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: ambientBreath 8s ease-in-out infinite;
+}
+
+@keyframes ambientBreath {
+  0%, 100% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+.stage > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 480px) {
+  .stage {
+    padding: calc(var(--sp-12) + 55px) var(--sp-5) var(--sp-10);
+  }
+  .stage::before {
+    width: 400px;
+    height: 350px;
+  }
+}
+
+@media (min-width: 768px) {
+  .stage {
+    padding: calc(var(--sp-20) + 65px) var(--sp-8) var(--sp-20);
+  }
+}

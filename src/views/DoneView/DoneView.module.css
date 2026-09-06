@@ -1,0 +1,225 @@
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-8);
+  text-align: center;
+  width: 100%;
+  max-width: 560px;
+  animation: fadeUp var(--dur-slow) var(--ease-out) both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icon {
+  font-size: var(--text-4xl);
+  color: var(--color-fg-subtle);
+  animation: pulseStar 2.4s ease-in-out infinite;
+}
+
+@keyframes pulseStar {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.1); }
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-3xl), 8vw, var(--text-5xl));
+  font-weight: 800;
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.sub {
+  font-size: var(--text-sm);
+  color: var(--color-fg-muted);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.againBtn {
+  padding: var(--sp-4) var(--sp-10);
+  border-radius: var(--radius-full);
+  background: var(--color-fg);
+  color: var(--black);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.againBtn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.againBtn:active {
+  transform: scale(0.97);
+}
+
+/* ─── Captured Notes Card ────────────────────────────── */
+.notesCard {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
+  text-align: start;
+  animation: fadeUp var(--dur-slow) var(--ease-out) both;
+}
+
+.notesHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.notesTitle {
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.notesActions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.copyBtn,
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-fg-muted);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.copyBtn:hover,
+.downloadBtn:hover {
+  color: var(--color-fg);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: var(--color-surface-2);
+  transform: translateY(-1px);
+}
+
+.copiedSuccess {
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.notesBody {
+  color: var(--color-fg);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+/* ─── Action Cluster ─────────────────────────────────── */
+.actionCluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  max-width: 420px;
+  margin-top: var(--sp-2);
+}
+
+.studioCardBtn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-6);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.studioCardBtn:hover:not(:disabled) {
+  background: var(--color-surface-2);
+  border-color: var(--color-border-2);
+  color: var(--color-fg);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.studioCardBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.studioCardBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+

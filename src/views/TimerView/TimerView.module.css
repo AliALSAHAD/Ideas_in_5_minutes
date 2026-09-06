@@ -1,0 +1,186 @@
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-10);
+  text-align: center;
+  width: 100%;
+  max-width: 560px;
+  animation: fadeUp var(--dur-slow) var(--ease-out) both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.topic {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 4.5vw, var(--text-3xl));
+  font-weight: 800;
+  font-optical-sizing: auto;
+  font-style: normal;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-fg);
+}
+
+/* ─── Lens Notice in Timer ───────────────────────────── */
+.lensNotice {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-full);
+  background: var(--color-glass-bg);
+  border: 1px solid var(--color-glass-border);
+  max-width: 520px;
+  animation: fadeUp 0.3s var(--ease-out) both;
+}
+
+.lensBadge {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  color: var(--color-fg);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.lensPromptText {
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+  line-height: 1.4;
+  text-align: start;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.primaryActions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pauseBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-6);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-fg-muted);
+  font-size: var(--text-base);
+  letter-spacing: 0.02em;
+  transition:
+    color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pauseBtn:hover {
+  color: var(--color-fg);
+  border-color: rgba(255, 255, 255, 0.7);
+  background: var(--color-surface-2);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.pauseBtn:active {
+  transform: scale(0.98);
+}
+
+.resetBtn {
+  font-size: var(--text-xs);
+  color: var(--color-fg-subtle);
+  letter-spacing: 0.02em;
+  padding: var(--sp-2) 0;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.resetBtn:hover {
+  color: var(--color-fg-muted);
+}
+
+/* ─── Zen Scratchpad ─────────────────────────────────── */
+.scratchpadWrap {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-top: var(--sp-1);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.scratchpadWrap:focus-within {
+  border-color: var(--color-border-2);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.scratchpadHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--color-fg-subtle);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.penIcon {
+  color: var(--color-fg-muted);
+  opacity: 0.85;
+}
+
+.scratchpadInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-fg);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 52px;
+  max-height: 160px;
+}
+
+.scratchpadInput::placeholder {
+  color: var(--zinc-600);
+}

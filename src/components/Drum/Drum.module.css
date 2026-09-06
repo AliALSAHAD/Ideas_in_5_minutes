@@ -1,0 +1,181 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  height: 228px;
+}
+
+/* ─── Precision Corner Accents ────────────────────────── */
+.corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--corner-accent);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 6;
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cornerTL {
+  top: -4px;
+  left: -4px;
+  border-width: 2px 0 0 2px;
+}
+.cornerTR {
+  top: -4px;
+  right: -4px;
+  border-width: 2px 2px 0 0;
+}
+.cornerBL {
+  bottom: -4px;
+  left: -4px;
+  border-width: 0 0 2px 2px;
+}
+.cornerBR {
+  bottom: -4px;
+  right: -4px;
+  border-width: 0 2px 2px 0;
+}
+
+.wrap:hover .corner {
+  border-color: var(--corner-accent-hover);
+  transform: scale(1.2);
+}
+
+.drum {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--drum-shadow);
+  position: relative;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Top edge specular reflection */
+.drum::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--corner-accent), transparent);
+  z-index: 5;
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+
+.wrap:hover .drum {
+  border-color: var(--color-border-2);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.wrap:hover .drum::before {
+  background: linear-gradient(90deg, transparent, var(--corner-accent-hover), transparent);
+}
+
+.reel {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+/* Items injected by useDrum — depth effect applied via inline style by hook */
+:global(.drum__item) {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  font-weight: 600;
+  font-optical-sizing: auto;
+  color: var(--color-fg-muted);
+  padding: 0 var(--sp-6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Smooth depth transitions */
+  transition:
+    color 80ms linear,
+    filter 80ms linear,
+    transform 80ms linear,
+    opacity 80ms linear;
+  transform-origin: center;
+}
+
+:global(.drum__item--selected) {
+  color: #ffffff;
+  font-weight: 800;
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+}
+
+.shade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 82px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.shadeTop {
+  top: 0;
+  background: linear-gradient(to bottom, var(--color-surface) 0%, transparent 100%);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.shadeBottom {
+  bottom: 0;
+  background: linear-gradient(to top, var(--color-surface) 0%, transparent 100%);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.cursor {
+  position: absolute;
+  top: 50%;
+  left: var(--sp-4);
+  right: var(--sp-4);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+  transform: translateY(-50%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.cursor::before,
+.cursor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%);
+}
+
+.cursor::before { left: -9px; }
+.cursor::after  { right: -9px; }
+
+@media (max-width: 480px) {
+  .wrap {
+    height: 195px;
+  }
+  :global(.drum__item) {
+    height: 65px;
+    font-size: 1.15rem;
+    padding: 0 var(--sp-3);
+  }
+  .shade {
+    height: 68px;
+  }
+}

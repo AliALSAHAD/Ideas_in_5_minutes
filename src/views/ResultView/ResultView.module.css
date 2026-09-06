@@ -1,0 +1,188 @@
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-6);
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  animation: fadeUp var(--dur-slow) var(--ease-out) both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Pure Typography Topic (No Box / No Border) ─────── */
+.topic {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 4.5vw, var(--text-4xl));
+  font-weight: 800;
+  font-optical-sizing: auto;
+  font-style: normal;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--color-fg);
+  outline: none;
+  padding: var(--sp-2) 0 var(--sp-4);
+  max-width: 620px;
+  word-wrap: break-word;
+}
+
+/* ─── Duration Section ───────────────────────────────── */
+.durationSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-2);
+}
+
+.hint {
+  font-size: var(--text-sm);
+  color: var(--color-fg-muted);
+  letter-spacing: 0.01em;
+}
+
+/* ─── Duration grid ──────────────────────────────────── */
+.durationGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+  width: 100%;
+}
+
+.durationCard {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: var(--sp-6) var(--sp-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-fg);
+  opacity: 1;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle top edge light reflection */
+.durationCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0.6;
+  z-index: 3;
+  transition: opacity 0.25s ease;
+}
+
+/* Dynamic spotlight following cursor */
+.durationCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    180px circle at var(--mouse-x) var(--mouse-y),
+    var(--corner-accent-hover) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.durationCard > * {
+  position: relative;
+  z-index: 2;
+}
+
+.durationCard:hover {
+  border-color: var(--color-border-2);
+  background: var(--color-card-hover-bg);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.durationCard:hover::before {
+  opacity: 1;
+  background: linear-gradient(90deg, transparent, var(--corner-accent-hover), transparent);
+}
+
+.durationCard:hover::after {
+  opacity: 0.15;
+}
+
+.durationCard:hover .num {
+  text-shadow: var(--drum-item-glow);
+}
+
+.durationCard:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.num {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  font-optical-sizing: auto;
+  line-height: 1;
+  transition: text-shadow 0.25s ease;
+}
+
+.unit {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-fg-subtle);
+}
+
+.cardLabel {
+  margin-top: var(--sp-2);
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Respin ─────────────────────────────────────────── */
+.respinBtn {
+  font-size: var(--text-sm);
+  color: var(--color-fg-muted);
+  letter-spacing: 0.02em;
+  padding: var(--sp-2) 0;
+  margin-top: var(--sp-2);
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.respinBtn:hover {
+  color: var(--color-fg);
+}
+
+@media (max-width: 480px) {
+  .view { gap: var(--sp-5); }
+  .durationGrid { gap: var(--sp-3); }
+  .durationCard { padding: var(--sp-5) var(--sp-3); }
+}

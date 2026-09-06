@@ -1,0 +1,176 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-5) var(--sp-8);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-header-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 800;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+  color: var(--color-fg);
+  user-select: none;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.themeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-fg-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.themeBtn:hover {
+  color: var(--color-fg);
+  border-color: var(--color-fg-muted);
+  background: var(--color-surface-2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.themeBtn:active {
+  transform: scale(0.94);
+}
+
+.langBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-fg-muted);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.langBtn:hover {
+  color: var(--color-fg);
+  border-color: rgba(255, 255, 255, 0.55);
+  background: var(--color-surface-2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.vaultBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-fg-muted);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.vaultBtn:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: var(--color-surface-2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.vaultIcon {
+  font-size: 11px;
+  color: var(--color-fg-subtle);
+}
+
+.streakBadge {
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.topicsBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-fg-muted);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition:
+    color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.topicsBtn:hover {
+  color: var(--color-fg);
+  border-color: rgba(255, 255, 255, 0.55);
+  background: var(--color-surface-2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: var(--sp-4) var(--sp-4);
+  }
+  .navActions {
+    gap: var(--sp-2);
+  }
+  .topicsBtn {
+    padding: var(--sp-2) var(--sp-3);
+    font-size: var(--text-xs);
+  }
+}

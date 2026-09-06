@@ -1,0 +1,117 @@
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-10);
+  text-align: center;
+  width: 100%;
+  max-width: 720px;
+  animation: fadeUp var(--dur-slow) var(--ease-out) both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Spin button base (Enlarged for Prominence) ─────── */
+.spinBtn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-1);
+  padding: var(--sp-6) var(--sp-16);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--spin-btn-border);
+  background: var(--spin-btn-bg);
+  color: var(--spin-btn-fg);
+  box-shadow: var(--spin-btn-shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Top edge specular reflection */
+.spinBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  opacity: 0.6;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+
+.spinBtn:hover:not(:disabled) {
+  background: var(--spin-btn-hover-bg);
+  border-color: var(--spin-btn-hover-border);
+  box-shadow: var(--spin-btn-hover-shadow);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.spinBtn:hover:not(:disabled)::before {
+  opacity: 1;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+}
+
+.spinBtn:hover:not(:disabled) .spinLabel {
+  text-shadow: var(--spin-btn-hover-glow);
+}
+
+.spinBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* ─── State while spinning ───────────────────────────── */
+.spinBtn.spinning {
+  cursor: not-allowed;
+  opacity: 0.75;
+  border-color: var(--spin-btn-border);
+  background: var(--spin-btn-bg);
+  transform: none;
+}
+
+/* ─── Labels ─────────────────────────────────────────── */
+.spinLabel {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 800;
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--spin-btn-fg);
+  transition: opacity var(--dur-base) var(--ease-out), text-shadow 0.25s ease;
+}
+
+.spinSub {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--spin-btn-sub);
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+@media (max-width: 480px) {
+  .view {
+    gap: var(--sp-8);
+  }
+  .spinBtn {
+    padding: var(--sp-4) var(--sp-10);
+  }
+}
