@@ -167,6 +167,11 @@ export const translations = {
     exportCard: 'Export Studio Card (PNG)',
     exportStudioCard: 'Export Studio Card (PNG)',
     generatingCard: 'Creating Card…',
+    // Hero Section
+    heroBadge: '✨ One Idea • 5 Minutes of Focus',
+    heroTitle: 'Learn it. Teach us what you learned.',
+    heroSubtitle: 'Discover a core concept, challenge your understanding, and share your takeaways in a 5-minute focused session.',
+    heroHint: 'Spin the reel or select a category above to begin',
     // Theme
     theme: 'Theme',
     switchToLight: 'Switch to Light Mode',
@@ -178,6 +183,11 @@ export const translations = {
     manageTopics: 'إدارة المواضيع',
     switchLang: 'English',
     switchLangAria: 'التحويل للإنجليزية',
+    // Hero Section
+    heroBadge: '✨ فكرة واحدة • 5 دقائق من التركيز',
+    heroTitle: 'تعلّم... وعلّمنا اللي تعلّمته',
+    heroSubtitle: '5 دقائق تكتشف فيها مفهوماً جديداً، تختبر فهمك له، وتشارك خلاصتك مع العالم.',
+    heroHint: 'دوّر العجلة أو حدد مجالاً من الأعلى للبدء',
     readyWhenYouAre: 'جاهز عندما تكون جاهزاً',
     spin: 'تدوير',
     spinning: 'جارِ الاختيار…',

@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--sp-10);
+  gap: var(--sp-6);
   text-align: center;
   width: 100%;
-  max-width: 720px;
+  max-width: 780px;
   animation: fadeUp var(--dur-slow) var(--ease-out) both;
 }
 
@@ -20,6 +20,69 @@
   }
 }
 
+/* ─── Hero Header Presentation ───────────────────────── */
+.heroHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.badgePill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-fg-subtle);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: var(--color-fg);
+  margin: 0;
+  max-width: 660px;
+}
+
+:global(html[lang="en"]) .heroTitle {
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.heroSubtitle {
+  font-family: var(--font-ui);
+  font-size: clamp(var(--text-xs), 1.5vw, var(--text-sm));
+  color: var(--color-fg-muted);
+  max-width: 540px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ─── Drum Section ───────────────────────────────────── */
+.drumSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ─── Action Section ─────────────────────────────────── */
+.actionSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
 /* ─── Spin button base (Enlarged for Prominence) ─────── */
 .spinBtn {
   position: relative;
@@ -28,7 +91,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--sp-1);
-  padding: var(--sp-6) var(--sp-16);
+  padding: var(--sp-5) var(--sp-16);
   border-radius: var(--radius-full);
   border: 1px solid var(--spin-btn-border);
   background: var(--spin-btn-bg);
@@ -89,7 +152,7 @@
 /* ─── Labels ─────────────────────────────────────────── */
 .spinLabel {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-size: clamp(1.8rem, 3.8vw, 2.4rem);
   font-weight: 800;
   font-optical-sizing: auto;
   letter-spacing: -0.02em;
@@ -107,11 +170,23 @@
   transition: opacity var(--dur-base) var(--ease-out);
 }
 
+.heroHint {
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  color: var(--color-fg-subtle);
+  letter-spacing: 0.03em;
+  margin: 0;
+  opacity: 0.8;
+}
+
 @media (max-width: 480px) {
   .view {
-    gap: var(--sp-8);
+    gap: var(--sp-5);
   }
   .spinBtn {
     padding: var(--sp-4) var(--sp-10);
+  }
+  .heroTitle {
+    font-size: 1.8rem;
   }
 }

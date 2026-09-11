@@ -11,25 +11,46 @@ export default function IdleView({ reelRef, drumWrapRef, onSpin, isSpinning }) {
   }
 
   return (
-    <section className={styles.view} aria-label={t.readyWhenYouAre}>
-      <p className="eyebrow">{t.readyWhenYouAre}</p>
+    <section className={styles.view} aria-label={t.heroTitle}>
+      {/* Hero Presentation */}
+      <header className={styles.heroHeader}>
+        <div className={styles.badgePill}>
+          <span>{t.heroBadge}</span>
+        </div>
+        <h1 className={styles.heroTitle}>
+          {t.heroTitle}
+        </h1>
+        <p className={styles.heroSubtitle}>
+          {t.heroSubtitle}
+        </p>
+      </header>
 
-      <Drum reelRef={reelRef} drumWrapRef={drumWrapRef} />
+      {/* Interactive Drum Centerpiece */}
+      <div className={styles.drumSection}>
+        <Drum reelRef={reelRef} drumWrapRef={drumWrapRef} />
+      </div>
 
-      <button
-        id="btn-spin"
-        className={`${styles.spinBtn} ${isSpinning ? styles.spinning : ''}`}
-        onClick={handleSpinClick}
-        disabled={isSpinning}
-        aria-label={isSpinning ? t.spinning : t.spin}
-      >
-        <span className={styles.spinLabel}>
-          {isSpinning ? t.spinning : t.spin}
-        </span>
-        <span className={styles.spinSub}>
-          {isSpinning ? t.findingTopic : t.pickTopic}
-        </span>
-      </button>
+      {/* Primary Action & Guidance */}
+      <div className={styles.actionSection}>
+        <button
+          id="btn-spin"
+          className={`${styles.spinBtn} ${isSpinning ? styles.spinning : ''}`}
+          onClick={handleSpinClick}
+          disabled={isSpinning}
+          aria-label={isSpinning ? t.spinning : t.spin}
+        >
+          <span className={styles.spinLabel}>
+            {isSpinning ? t.spinning : t.spin}
+          </span>
+          <span className={styles.spinSub}>
+            {isSpinning ? t.findingTopic : t.pickTopic}
+          </span>
+        </button>
+
+        <p className={styles.heroHint}>
+          {t.heroHint}
+        </p>
+      </div>
     </section>
   );
 }
