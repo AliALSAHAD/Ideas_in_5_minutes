@@ -55,6 +55,6 @@
 
 @media (min-width: 768px) {
   .stage {
-    padding: calc(var(--sp-20) + 65px) var(--sp-8) var(--sp-20);
+    padding: calc(var(--sp-6) + 56px) var(--sp-6) var(--sp-6);
   }
 }
