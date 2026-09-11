@@ -1,11 +1,24 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
 
-const ITEM_H = 76; // px per drum slot (enlarged for prominence)
+const ITEM_H = 76; // px per drum slot on desktop
 const VISIBLE = 3;
-const SPIN_DURATION = 4800; // ms — slower, graceful, suspenseful cinematic feel
+const SPIN_DURATION = 3400; // ms — dynamic, suspenseful, responsive
+
+/* ─── Helper to get true unscaled item height ─────────── */
+function getItemHeight(reelEl) {
+  const item = reelEl?.querySelector('.drum__item');
+  if (item && typeof window !== 'undefined') {
+    const computed = parseFloat(window.getComputedStyle(item).height);
+    if (!isNaN(computed) && computed > 0) return computed;
+  }
+  if (typeof window !== 'undefined' && window.innerWidth <= 480) {
+    return 65;
+  }
+  return ITEM_H;
+}
 
 /* ─── C1-Continuous Physics Easing: Smooth ramp-up + prolonged gradual deceleration ─ */
-const TA = 0.13;     // Acceleration ramp-up takes 13% of duration (~620ms)
+const TA = 0.13;     // Acceleration ramp-up takes 13% of duration (~440ms)
 const ALPHA = 1.75;  // Deceleration curve power for organic mechanical crawl
 const K1 = TA / 3;
 const K2 = (1 - TA) / (ALPHA + 1);
@@ -143,7 +156,7 @@ export function useDrum(topics) {
       const opacity = Math.max(1 - dist * 0.22, 0.42);
       el.style.filter = dist === 0 ? 'none' : `blur(${blur}px)`;
       el.style.transform = `scale(${scale})`;
-      el.style.opacity = opacity;
+      el.style.opacity = dist === 0 ? '1' : opacity;
     });
   }
 
@@ -185,11 +198,12 @@ export function useDrum(topics) {
     const items = reel.querySelectorAll('.drum__item');
     if (items.length === 0) { onDone?.(); return; }
 
+    const itemH = getItemHeight(reel);
     const topicIndex = topics.indexOf(finalTopic);
     const repeatBlock = Math.max(4, Math.floor(items.length / (topics.length * 2)));
     const landingIndex = repeatBlock * topics.length + (topicIndex >= 0 ? topicIndex : 0);
     const centerOffset = Math.floor(VISIBLE / 2);
-    const targetY = -(landingIndex - centerOffset) * ITEM_H;
+    const targetY = -(landingIndex - centerOffset) * itemH;
 
     items.forEach(el => {
       el.classList.remove('drum__item--selected');
@@ -212,7 +226,7 @@ export function useDrum(topics) {
       reel.style.transform = `translateY(${currentY}px)`;
 
       // Depth effect
-      const centeredIdx = Math.round((-currentY) / ITEM_H) + centerOffset;
+      const centeredIdx = Math.round((-currentY) / itemH) + centerOffset;
       applyDepthEffect(items, centeredIdx);
 
       // Highlight selected
@@ -220,9 +234,9 @@ export function useDrum(topics) {
         el.classList.toggle('drum__item--selected', i === centeredIdx)
       );
 
-      // Tick sound — rate proportional to speed (derivative of position)
+      // Tick sound — rate proportional to speed
       const velocity = Math.abs(targetY * (physicsEase(Math.min(t + 0.005, 1)) - easedT) / 0.005);
-      const minTickInterval = Math.max(35, 220 - velocity * 0.28); // faster spin = faster ticks
+      const minTickInterval = Math.max(35, 220 - velocity * 0.28);
       if (centeredIdx !== lastTickIndex && (now - lastTickTime) > minTickInterval) {
         const speedNorm = Math.min(velocity / 320, 1);
         playTick(speedNorm);
@@ -233,11 +247,11 @@ export function useDrum(topics) {
       if (t < 1) {
         rafRef.current = requestAnimationFrame(tick);
       } else {
-        // Landed
+        // Landed cleanly
         reel.style.transform = `translateY(${targetY}px)`;
         const finalItems = reel.querySelectorAll('.drum__item');
-        finalItems[landingIndex]?.classList.add('drum__item--selected');
         applyDepthEffect(finalItems, landingIndex);
+        finalItems[landingIndex]?.classList.add('drum__item--selected');
         setSpinPhase('landed');
 
         // Particle burst at drum wrap
@@ -248,7 +262,7 @@ export function useDrum(topics) {
         setTimeout(() => {
           setSpinPhase('idle');
           onDone?.();
-        }, 600);
+        }, 650);
       }
     }
 

@@ -167,12 +167,22 @@
 
 @media (max-width: 480px) {
   .view {
-    gap: var(--sp-5);
-  }
-  .spinBtn {
-    padding: var(--sp-4) var(--sp-10);
+    gap: var(--sp-4);
   }
   .heroTitle {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+    line-height: 1.25;
+  }
+  .heroSubtitle {
+    font-size: 0.8125rem;
+    max-width: 320px;
+    line-height: 1.5;
+  }
+  .spinBtn {
+    width: min(340px, 92vw);
+    padding: var(--sp-4) var(--sp-6);
+  }
+  .spinLabel {
+    font-size: 1.65rem;
   }
 }

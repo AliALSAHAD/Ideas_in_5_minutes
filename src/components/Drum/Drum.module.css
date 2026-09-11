@@ -112,9 +112,12 @@
 }
 
 :global(.drum__item--selected) {
-  color: #ffffff;
-  font-weight: 800;
-  text-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+  color: var(--drum-item-selected) !important;
+  font-weight: 800 !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: scale(1.05) !important;
+  text-shadow: var(--drum-item-glow);
 }
 
 .shade {
