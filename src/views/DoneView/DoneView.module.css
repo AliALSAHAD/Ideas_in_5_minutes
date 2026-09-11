@@ -142,15 +142,15 @@
 .copyBtn:hover,
 .downloadBtn:hover {
   color: var(--color-fg);
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: var(--color-border-2);
   background: var(--color-surface-2);
   transform: translateY(-1px);
 }
 
 .copiedSuccess {
-  border-color: rgba(255, 255, 255, 0.8) !important;
-  color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--color-fg) !important;
+  color: var(--color-fg) !important;
+  background: var(--color-surface-2) !important;
 }
 
 .notesBody {

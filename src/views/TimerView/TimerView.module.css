@@ -99,13 +99,10 @@
 
 .pauseBtn:hover {
   color: var(--color-fg);
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: var(--color-border-2);
   background: var(--color-surface-2);
   transform: translateY(-2px);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.3),
-    0 0 20px rgba(255, 255, 255, 0.08),
-    0 8px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-card);
 }
 
 .pauseBtn:active {
