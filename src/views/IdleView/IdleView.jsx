@@ -14,9 +14,6 @@ export default function IdleView({ reelRef, drumWrapRef, onSpin, isSpinning }) {
     <section className={styles.view} aria-label={t.heroTitle}>
       {/* Hero Presentation */}
       <header className={styles.heroHeader}>
-        <div className={styles.badgePill}>
-          <span>{t.heroBadge}</span>
-        </div>
         <h1 className={styles.heroTitle}>
           {t.heroTitle}
         </h1>
