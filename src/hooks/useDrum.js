@@ -100,66 +100,28 @@ function smartRandom(topics) {
   return candidates[candidates.length - 1];
 }
 
-/* ─── Particle burst ─────────────────────────────────── */
-function spawnParticles(containerEl) {
-  if (!containerEl) return;
-  const rect = containerEl.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-
-  for (let i = 0; i < 18; i++) {
-    const el = document.createElement('div');
-    el.style.cssText = `
-      position: fixed;
-      left: ${cx}px;
-      top: ${cy}px;
-      width: ${3 + Math.random() * 4}px;
-      height: ${3 + Math.random() * 4}px;
-      border-radius: 50%;
-      background: ${Math.random() > 0.5 ? '#ffffff' : '#a1a1aa'};
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-    `;
-    document.body.appendChild(el);
-
-    const angle = (Math.random() * 360 * Math.PI) / 180;
-    const dist = 40 + Math.random() * 80;
-    const tx = Math.cos(angle) * dist;
-    const ty = Math.sin(angle) * dist;
-    const duration = 500 + Math.random() * 400;
-
-    el.animate([
-      { opacity: 1, transform: `translate(-50%, -50%) scale(1)` },
-      { opacity: 0, transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.2)` },
-    ], {
-      duration,
-      easing: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
-      fill: 'forwards',
-    }).onfinish = () => el.remove();
-  }
-}
-
 /* ─── useDrum hook ───────────────────────────────────── */
 export function useDrum(topics) {
   const reelRef = useRef(null);
   const drumWrapRef = useRef(null);
   const rafRef = useRef(null);
+  const timeoutRef = useRef(null);
   const [spinPhase, setSpinPhase] = useState('idle'); // 'idle' | 'countdown' | 'spinning' | 'landed'
 
-  // Apply blur+scale CSS variable based on distance from center
+  // Place each visible face on a cylindrical surface.
   function applyDepthEffect(items, centeredIdx) {
     items.forEach((el, i) => {
-      const dist = Math.abs(i - centeredIdx);
-      const blur = Math.min(dist * 0.8, 2.5);
-      const scale = Math.max(1 - dist * 0.06, 0.84);
-      const opacity = Math.max(1 - dist * 0.22, 0.42);
-      el.style.filter = dist === 0 ? 'none' : `blur(${blur}px)`;
-      el.style.transform = `scale(${scale})`;
-      el.style.opacity = dist === 0 ? '1' : opacity;
+      const distance = i - centeredIdx;
+      const angle = distance * 30;
+      const visible = Math.abs(angle) < 90;
+      el.style.visibility = visible ? 'visible' : 'hidden';
+      if (!visible) return;
+      el.style.filter = 'none';
+      el.style.transform = `rotateX(${-angle}deg) translateZ(var(--reel-radius))`;
+      el.style.opacity = String(Math.max(0.15, Math.cos(angle * Math.PI / 180) ** 3));
+      el.classList.toggle('drum__item--selected', Math.abs(distance) < 0.48);
     });
   }
-
   // Build reel items
   const buildReel = useCallback(() => {
     const reel = reelRef.current;
@@ -183,7 +145,7 @@ export function useDrum(topics) {
     applyDepthEffect(items, centerOffset);
   }, [topics]);
 
-  useEffect(() => { buildReel(); }, [buildReel]);
+  useEffect(() => { buildReel(); return () => { cancelAnimationFrame(rafRef.current); clearTimeout(timeoutRef.current); }; }, [buildReel]);
 
   /* ── Countdown → Spin ────────────────────────────── */
   const spin = useCallback((finalTopic, onDone) => {
@@ -213,56 +175,54 @@ export function useDrum(topics) {
     });
 
     setSpinPhase('spinning');
+    drumWrapRef.current?.setAttribute('data-landed', 'false');
 
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const duration = reducedMotion ? 120 : SPIN_DURATION;
     const startTime = performance.now();
     let lastTickIndex = -1;
     let lastTickTime = 0;
 
     function tick(now) {
-      const t = Math.min((now - startTime) / SPIN_DURATION, 1);
+      const t = Math.min((now - startTime) / duration, 1);
       const easedT = physicsEase(t);
-      const currentY = targetY * easedT;
-
-      reel.style.transform = `translateY(${currentY}px)`;
+      const currentY = (targetY - (reducedMotion ? 0 : itemH * 0.10)) * easedT;
 
       // Depth effect
-      const centeredIdx = Math.round((-currentY) / itemH) + centerOffset;
+      const centeredIdx = (-currentY) / itemH + centerOffset;
       applyDepthEffect(items, centeredIdx);
-
-      // Highlight selected
-      items.forEach((el, i) =>
-        el.classList.toggle('drum__item--selected', i === centeredIdx)
-      );
 
       // Tick sound — rate proportional to speed
       const velocity = Math.abs(targetY * (physicsEase(Math.min(t + 0.005, 1)) - easedT) / 0.005);
       const minTickInterval = Math.max(35, 220 - velocity * 0.28);
-      if (centeredIdx !== lastTickIndex && (now - lastTickTime) > minTickInterval) {
+      if (!reducedMotion && Math.round(centeredIdx) !== lastTickIndex && (now - lastTickTime) > minTickInterval) {
         const speedNorm = Math.min(velocity / 320, 1);
         playTick(speedNorm);
-        lastTickIndex = centeredIdx;
+        lastTickIndex = Math.round(centeredIdx);
         lastTickTime = now;
       }
 
       if (t < 1) {
         rafRef.current = requestAnimationFrame(tick);
       } else {
-        // Landed cleanly
-        reel.style.transform = `translateY(${targetY}px)`;
-        const finalItems = reel.querySelectorAll('.drum__item');
-        applyDepthEffect(finalItems, landingIndex);
-        finalItems[landingIndex]?.classList.add('drum__item--selected');
-        setSpinPhase('landed');
-
-        // Particle burst at drum wrap
-        spawnParticles(drumWrapRef.current);
-
-        // Final tick — satisfying "click" landing sound
-        playTick(0);
-        setTimeout(() => {
-          setSpinPhase('idle');
-          onDone?.();
-        }, 650);
+        const settleStart = performance.now();
+        function settle(time) {
+          const progress = reducedMotion ? 1 : Math.min((time - settleStart) / 300, 1);
+          const offset = 0.10 * (1 - progress) ** 2 * Math.cos(progress * Math.PI * 2);
+          applyDepthEffect(items, landingIndex + offset);
+          if (progress < 1) {
+            rafRef.current = requestAnimationFrame(settle);
+          } else {
+            setSpinPhase('landed');
+            drumWrapRef.current?.setAttribute('data-landed', 'true');
+            if (!reducedMotion) playTick(0);
+            timeoutRef.current = setTimeout(() => {
+              setSpinPhase('idle');
+              onDone?.();
+            }, 650);
+          }
+        }
+        rafRef.current = requestAnimationFrame(settle);
       }
     }
 

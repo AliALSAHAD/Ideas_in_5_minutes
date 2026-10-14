@@ -1,184 +1,120 @@
 .wrap {
+  --reel-radius: 148px;
   position: relative;
   width: 100%;
   max-width: 680px;
-  height: 228px;
+  height: 310px;
+  padding: 22px 32px;
+  border-radius: 28px;
+  border: 1px solid var(--color-border-2);
+  background: linear-gradient(135deg, var(--color-surface-2), var(--color-surface) 40%, var(--color-surface-2));
+  box-shadow: inset 0 1px 0 #ffffff25, inset 0 -2px 3px #00000050, 0 30px 60px -25px #00000080;
 }
-
-/* ─── Precision Corner Accents ────────────────────────── */
-.corner {
+.wrap::before, .wrap::after {
+  content: '';
   position: absolute;
-  width: 12px;
-  height: 12px;
-  border-color: var(--corner-accent);
-  border-style: solid;
-  pointer-events: none;
-  z-index: 6;
-  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  top: 28px;
+  bottom: 28px;
+  width: 8px;
+  border-radius: 8px;
+  background: repeating-linear-gradient(0deg, #ffffff18 0 1px, transparent 1px 5px), linear-gradient(90deg, var(--color-surface), var(--color-border-2), var(--color-surface));
 }
-
-.cornerTL {
-  top: -4px;
-  left: -4px;
-  border-width: 2px 0 0 2px;
-}
-.cornerTR {
-  top: -4px;
-  right: -4px;
-  border-width: 2px 2px 0 0;
-}
-.cornerBL {
-  bottom: -4px;
-  left: -4px;
-  border-width: 0 0 2px 2px;
-}
-.cornerBR {
-  bottom: -4px;
-  right: -4px;
-  border-width: 0 2px 2px 0;
-}
-
-.wrap:hover .corner {
-  border-color: var(--corner-accent-hover);
-  transform: scale(1.2);
-}
-
+.wrap::before { left: 12px; }
+.wrap::after { right: 12px; }
 .drum {
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
+  border-radius: 12px;
   background: var(--color-surface);
-  box-shadow: var(--drum-shadow);
-  position: relative;
-  transition:
-    background 0.3s ease,
-    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--color-border-2);
+  box-shadow: inset 0 18px 30px #00000060, inset 0 -18px 30px #00000060;
+  perspective: 1000px;
 }
-
-/* Top edge specular reflection */
-.drum::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--corner-accent), transparent);
-  z-index: 5;
-  pointer-events: none;
-  transition: background 0.3s ease;
-}
-
-.wrap:hover .drum {
-  border-color: var(--color-border-2);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.wrap:hover .drum::before {
-  background: linear-gradient(90deg, transparent, var(--corner-accent-hover), transparent);
-}
-
 .reel {
-  display: flex;
-  flex-direction: column;
-  will-change: transform;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: none !important;
 }
-
-/* Items injected by useDrum — depth effect applied via inline style by hook */
 :global(.drum__item) {
+  position: absolute;
+  top: calc(50% - 38px);
+  left: 0;
+  width: 100%;
   height: 76px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 24px;
+  backface-visibility: hidden;
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  font-size: clamp(1rem, 2.6vw, 1.65rem);
   font-weight: 600;
-  font-optical-sizing: auto;
   color: var(--color-fg-muted);
-  padding: 0 var(--sp-6);
-  white-space: nowrap;
+  text-align: center;
+  line-height: 1.35;
   overflow: hidden;
-  text-overflow: ellipsis;
-  /* Smooth depth transitions */
-  transition:
-    color 80ms linear,
-    filter 80ms linear,
-    transform 80ms linear,
-    opacity 80ms linear;
-  transform-origin: center;
+  border-block: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-surface-2), var(--color-surface));
 }
-
-:global(.drum__item--selected) {
-  color: var(--drum-item-selected) !important;
-  font-weight: 800 !important;
-  filter: none !important;
-  opacity: 1 !important;
-  transform: scale(1.05) !important;
-  text-shadow: var(--drum-item-glow);
-}
-
+:global(.drum__item--selected) { color: var(--color-fg); }
 .shade {
   position: absolute;
-  left: 0;
-  right: 0;
-  height: 82px;
+  left: 33px;
+  right: 33px;
+  height: 95px;
   pointer-events: none;
   z-index: 2;
 }
-
-.shadeTop {
-  top: 0;
-  background: linear-gradient(to bottom, var(--color-surface) 0%, transparent 100%);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-}
-
-.shadeBottom {
-  bottom: 0;
-  background: linear-gradient(to top, var(--color-surface) 0%, transparent 100%);
-  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-}
-
+.shadeTop { top: 23px; background: linear-gradient(var(--color-surface), transparent); border-radius: 12px 12px 0 0; }
+.shadeBottom { bottom: 23px; background: linear-gradient(transparent, var(--color-surface)); border-radius: 0 0 12px 12px; }
 .cursor {
   position: absolute;
-  top: 50%;
-  left: var(--sp-4);
-  right: var(--sp-4);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
-  transform: translateY(-50%);
+  top: calc(50% - 40px);
+  left: 32px;
+  right: 32px;
+  height: 80px;
+  border-block: 1px solid var(--corner-accent-hover);
+  background: linear-gradient(90deg, var(--color-aura), transparent 25%, transparent 75%, var(--color-aura));
   z-index: 3;
   pointer-events: none;
+  transition: box-shadow 250ms;
 }
-
-.cursor::before,
-.cursor::after {
+.cursor::before, .cursor::after {
   content: '';
   position: absolute;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  transform: translateY(-50%);
+  top: calc(50% - 6px);
+  width: 0;
+  height: 0;
+  border-block: 6px solid transparent;
+  filter: drop-shadow(0 2px 2px #00000060);
 }
-
-.cursor::before { left: -9px; }
-.cursor::after  { right: -9px; }
-
+.cursor::before { left: -17px; border-left: 9px solid var(--color-fg); }
+.cursor::after { right: -17px; border-right: 9px solid var(--color-fg); }
+.wrap[data-landed='true'] .cursor { box-shadow: 0 0 24px var(--color-aura), inset 0 0 24px var(--color-aura); }
+.corner {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-border-2), var(--color-surface));
+  box-shadow: inset 0 1px 1px #ffffff40, 0 1px 2px #00000080;
+}
+.cornerTL { top: 10px; left: 10px; }
+.cornerTR { top: 10px; right: 10px; }
+.cornerBL { bottom: 10px; left: 10px; }
+.cornerBR { bottom: 10px; right: 10px; }
 @media (max-width: 480px) {
-  .wrap {
-    height: 195px;
-  }
-  :global(.drum__item) {
-    height: 65px;
-    font-size: 1.15rem;
-    padding: 0 var(--sp-3);
-  }
-  .shade {
-    height: 68px;
-  }
+  .wrap { --reel-radius: 126px; height: 270px; padding: 20px 26px; border-radius: 22px; }
+  .shade { left: 27px; right: 27px; height: 82px; }
+  .shadeTop { top: 21px; }
+  .shadeBottom { bottom: 21px; }
+  .cursor { left: 26px; right: 26px; height: 68px; top: calc(50% - 34px); }
+  :global(.drum__item) { height: 65px; top: calc(50% - 32.5px); padding-inline: 16px; font-size: 1rem; }
+  .wrap::before { left: 10px; width: 5px; }
+  .wrap::after { right: 10px; width: 5px; }
+  .cursor::before { left: -14px; }
+  .cursor::after { right: -14px; }
 }
